@@ -2,46 +2,27 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Introducing visio cms
+Welcome to visio cms, a revolutionary Visual Content Management System that seamlessly bridges the gap between developers and content creators, empowering both to bring their visions to life effortlessly.
 
-Let's discover **Docusaurus in less than 5 minutes**.
+## Key Features
 
-## Getting Started
+- ### 1. Visual Component Building
+visio cms enables developers to effortlessly build and export React components, laying the foundation for a dynamic and responsive web page. With an intuitive visual interface, developers can craft components that encapsulate functionality, styling, and interactivity, all within a visually engaging environment.
 
-Get started by **creating a new site**.
+- ### 2. Empowering Content Creators
+Content creators, rejoice! visio cms empowers you to take control of the layout of your web pages without the need for extensive coding knowledge. Our user-friendly platform allows you to intuitively arrange and customize React components, ensuring your content looks and feels exactly as you envision it.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+- ### 3. Dynamic Attribute Control
+Say goodbye to the frustration of limited customization options. visio cms introduces powerful controllers that enable content creators to dynamically modify attributes of blocks or components. Adjust text, tweak colors, swap images – all at your fingertips. This flexibility ensures that every piece of content is tailored to perfection.
 
-### What you'll need
+## Why Choose visio cms?
+- **Efficiency Redefined**: Developers save valuable time by exporting reusable components, while content creators enjoy a streamlined process to design and modify layouts.
 
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+- **Consistency Across Projects**: Maintain consistency across projects by reusing components, ensuring a cohesive and professional aesthetic.
 
-## Generate a new site
+- **Endless Customization**: The dynamic attribute control feature provides content creators with the freedom to fine-tune every detail, eliminating the need for constant developer intervention.
 
-Generate a new Docusaurus site using the **classic template**.
+- **Collaboration Made Easy**: Developers and content creators can work harmoniously, each focusing on their strengths, ultimately accelerating the web development workflow.
 
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Discover the joy of harmonious collaboration and unparalleled efficiency with visio cms. Empower developers and content creators alike to create stunning web experiences without the hassle of repetitive tasks. Welcome to a new era of web development and content creation!

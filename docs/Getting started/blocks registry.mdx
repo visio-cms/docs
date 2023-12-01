@@ -49,7 +49,7 @@ export default registeredBlocks
 ```
 
 
-## registeredBlocks Array Key Meanings
+## Block object Key Meanings
 
 Let's explore the `registeredBlocks` array and decipher the significance of each key in the object:
 
@@ -57,14 +57,13 @@ Let's explore the `registeredBlocks` array and decipher the significance of each
 - **`component`** - Reference to the block you built and imported.
 - **`title`** - Representation name of the block in the builder.
 - **`icon`** - Icon to visually represent the block. For example, an `ImageIcon` from `@radix-ui/react-icons`. Choose any suitable icon (e.g., SVGs, FontAwesome icons, Luci-react icons).
-- **`defaultInputs`** - Default prop values that come with the block when initially added. This object matches the props of your block. In our example, we have `title`, `subTitle` and `image`.
+- **`defaultInputs`** - Default prop values that come with the block when initially added. This object matches the props of your block. In our example, we have `title`, `subTitle` and `image`. We can also set it to an empty object and add a null check at where we reference it in the block just like what we did to the image. eg. `defaultInputs: {}`
 - **`controllers`** - Array of controls managing the values of your props. Each prop is mapped to a controller, allowing non-coders to modify block attributes easily (e.g., color, image, font size). In our example, we map `title` to text controller, `subTitle` to a rich text editor and `image` to an image controller.
 - **`key`** - Unique identifier for the block. **NB** Should not contain spaces and must be unique.
 
 ## Adding the blocks to the web page
 
 We can start adding our block the a web page. Visit http://localhost:3000/builder/index. You have to login with your visio cms email and password.
-
 
 
 For the first time opening the builder after login, you will be asked to create a page. Enter your page name and slug. **NB** `/index` is always your home page of your website.
