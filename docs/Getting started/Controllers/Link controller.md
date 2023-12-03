@@ -45,7 +45,7 @@ const registeredBlocks: Block[] = [
     component: AddressBlock
     ****
     controllers: [
-      { name: 'address', type: 'richText', label: "Company's address" }
+      { name: 'address', type: 'richText', label: "Company's address" },
       { name: 'addressLink', type: 'link', label: "Link to google maps address" }
     ],
     ****

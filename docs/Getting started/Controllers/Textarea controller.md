@@ -6,7 +6,7 @@ sidebar_position: 3
 
 Unlike the text controller, which accepts a limited number of strings, the textarea accepts large chunk of strings. This can be used in your website where you want to display a sub title or a large text without html formatting. 
 
-```jsx title="/components/blocks/TextBlock.tsx"
+```jsx title="/components/blocks/TextareaBock.tsx"
 
 type PropsT = {
   content: string;
