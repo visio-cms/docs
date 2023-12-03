@@ -37,7 +37,7 @@ export default function AddressBlock({addressLink, address}: PropsT) {
 
 ```jsx title="/components/blocks_registry.tsx"
 
-import AddressBlock from '@/components/blocks/AddressBlock.tsx';
+import AddressBlock from '@/components/blocks/AddressBlock';
 
 const registeredBlocks: Block[] = [
  *****

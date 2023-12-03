@@ -88,7 +88,7 @@ export default function Collections({ collections, title }: { collections: Colle
 
 ```jsx title="/components/blocks_registry.tsx"
 
-import Collections from '@/components/blocks/Collections.tsx';
+import Collections from '@/components/blocks/Collections';
 
 const registeredBlocks: Block[] = [
  *****

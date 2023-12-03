@@ -24,7 +24,7 @@ export default function TextBlock({ title}: PropsT) {
 
 ```jsx title="/components/blocks_registry.tsx"
 
-import TextBlock from '@/components/blocks/TextBlock.tsx';
+import TextBlock from '@/components/blocks/TextBlock';
 
 const registeredBlocks: Block[] = [
  *****

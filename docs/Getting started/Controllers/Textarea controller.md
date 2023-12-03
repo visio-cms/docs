@@ -24,7 +24,7 @@ export default function TextareaBlock({ content}: PropsT) {
 
 ```jsx title="/components/blocks_registry.tsx"
 
-import TextareaBlock from '@/components/blocks/TextareaBlock.tsx';
+import TextareaBlock from '@/components/blocks/TextareaBlock';
 
 const registeredBlocks: Block[] = [
  *****

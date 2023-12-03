@@ -51,7 +51,7 @@ export default function HeroBlock({avatar}: PropsT) {
 
 ```jsx title="/components/blocks_registry.tsx"
 
-import HeroBlock from '@/components/blocks/HeroBlock.tsx';
+import HeroBlock from '@/components/blocks/HeroBlock';
 
 const registeredBlocks: Block[] = [
  *****

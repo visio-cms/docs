@@ -24,7 +24,7 @@ export default function NumberBlock({ counter}: PropsT) {
 
 ```jsx title="/components/blocks_registry.tsx"
 
-import NumberBlock from '@/components/blocks/NumberBlock.tsx';
+import NumberBlock from '@/components/blocks/NumberBlock';
 
 const registeredBlocks: Block[] = [
  *****
