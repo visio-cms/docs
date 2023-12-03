@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# Introduction
+# Controllers
 
-## Controllers
+## Introduction
 
 As the name goes **controllers**, these are array of elements in the builder right side bar, which are mapped to control the values of the props of your blocks. 
 
