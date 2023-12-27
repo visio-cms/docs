@@ -24,7 +24,7 @@ export default function DatePickerController({
   propIndex,
   defaultValue,
   handlePropValueChange,
-}: RenderBlockControllerProps) {
+}: Pick<RenderBlockControllerProps, 'propIndex' | 'defaultValue' | 'handlePropValueChange'> & { prop: DatePickerT }) {
   return (
     <div className="absolute w-full left-0 px-1 date-picker">
       <Datepicker
