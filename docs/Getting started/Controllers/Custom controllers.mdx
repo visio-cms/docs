@@ -16,7 +16,7 @@ To begin leveraging the power of custom controllers in Visio CMS, locate the con
 ```tsx title="/components/controllers/DatePickerController.tsx"
 'use client';
 import { Datepicker } from 'flowbite-react';
-import { RenderBlockControllerProps } from 'visio-cms';
+import { CustomControllerProps } from 'visio-cms';
 
 
 export default function DatePickerController({
@@ -24,7 +24,7 @@ export default function DatePickerController({
   propIndex,
   defaultValue,
   handlePropValueChange,
-}: Pick<RenderBlockControllerProps, 'propIndex' | 'defaultValue' | 'handlePropValueChange'> & { prop: DatePickerT }) {
+}: CustomControllerProps<DatePickerT>) {
   return (
     <div className="absolute w-full left-0 px-1 date-picker">
       <Datepicker
@@ -41,7 +41,7 @@ export default function DatePickerController({
 
 The above component leverages a date picker component from [FlowBite](https://www.flowbite-react.com/docs/components/datepicker). We have created a simple date picker component that passes a date to our block component.
 
-In this integration, we utilize specific properties such as `prop`, `propIndex`, `defaultValue`, and `handlePropValueChange` from `RenderBlockControllerProps` provided by `visio-cms`. These properties are essential for visio to correctly pass the value of the selected date to the respective block.
+In this integration, we utilize specific properties such as `prop`, `propIndex`, `defaultValue`, and `handlePropValueChange` from `CustomControllerProps` provided by `visio-cms`. These properties are essential for visio to correctly pass the value of the selected date to the respective block.
 
 The `handlePropValueChange` function plays a crucial role in updating and passing the new date value to the block. The first argument, `date`, represents the new value we are assigning to the prop. It could be a string, object, array, React Node, etc.
 
@@ -69,7 +69,7 @@ import { ComponentType } from 'react';
 
 export type DatePickerT = {
   type: 'datePicker';
-  //options: object[];
+  maxDate: Date;
   //...more types if your controller need them and access them via the prop of the controller
 };
 
@@ -83,7 +83,7 @@ export type DatePickerT = {
 
 export type CustomControllerT = DatePickerT 
 
-export type CustomControllerType = CustomControllerT & {
+export type CustomControllerType = Pick<CustomControllerT , 'type'> & {
   component: ComponentType<any>;
 };
 ```
