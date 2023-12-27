@@ -10,7 +10,37 @@ import Image2 from '../../../static/date_picke_custom_controller.png'
 ## Overview
 Visio CMS also offers a seamless and user-friendly experience for enhancing your web content through the integration of custom controllers. In addition to the built-in controllers, our platform empowers you to personalize and extend functionality by incorporating your own controllers. This feature opens up a realm of possibilities, allowing you to augment the attributes of your content blocks with ease.
 
-## Getting Started
+## Getting started
+
+## Setting a type for our controller
+
+In the `lib/types.ts` file, it is imperative to define a dedicated type for our controller. This ensures that visio can seamlessly recognize the controller type whenever we engage in the mapping process between the controller type and a corresponding prop.
+
+```ts title="/lib/types.ts"
+import { ComponentType } from 'react';
+
+export type DatePickerT = {
+  type: 'datePicker';
+  minDate: Date;
+  //...more types if your controller need them and access them via the prop of the controller
+};
+
+//export type SecondControllerT = {
+//  type: 'secondControllerType';
+//};
+
+
+//we need to make use of typescript Discriminating (|) Union any time we want to an additional controller
+//export type CustomControllerT = DatePickerT | SecondControllerT
+
+export type CustomControllerT = DatePickerT 
+
+export type CustomControllerType = Pick<CustomControllerT , 'type'> & {
+  component: ComponentType<any>;
+};
+```
+
+## Building our controller
 To begin leveraging the power of custom controllers in Visio CMS, locate the controllers folder under `/components/controllers` and add a new  react component `example below`
 
 ```tsx title="/components/controllers/DatePickerController.tsx"
@@ -30,6 +60,7 @@ export default function DatePickerController({
       <Datepicker
         onSelectedDateChanged={(date) => handlePropValueChange(date, propIndex, prop)}
         defaultValue={defaultValue}
+        minDate={prop.minDate}
       />
     </div>
   );
@@ -58,34 +89,6 @@ The `prop` allows us to access other props needed by the controller. eg. `option
       { name: 'date', type: 'datePicker', label: "Choose event date", minDate: new Date()  },
     ],
 
-```
-
-## Setting a type for our controller
-
-In the `lib/types.ts` file, it is imperative to define a dedicated type for our controller. This ensures that visio can seamlessly recognize the controller type whenever we engage in the mapping process between the controller type and a corresponding prop.
-
-```ts title="/lib/types.ts"
-import { ComponentType } from 'react';
-
-export type DatePickerT = {
-  type: 'datePicker';
-  maxDate: Date;
-  //...more types if your controller need them and access them via the prop of the controller
-};
-
-//export type SecondControllerT = {
-//  type: 'secondControllerType';
-//};
-
-
-//we need to make use of typescript Discriminating (|) Union any time we want to an additional controller
-//export type CustomControllerT = DatePickerT | SecondControllerT
-
-export type CustomControllerT = DatePickerT 
-
-export type CustomControllerType = Pick<CustomControllerT , 'type'> & {
-  component: ComponentType<any>;
-};
 ```
 
 ## Registering the controller
