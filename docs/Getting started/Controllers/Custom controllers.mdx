@@ -47,6 +47,18 @@ The `handlePropValueChange` function plays a crucial role in updating and passin
 
 The `defaultValue` is a necessary value that we set back to the DatePicker's defaultValue whenever the block is selected. This enables us to adjust it as needed.
 
+The `prop` allows us to access other props needed by the controller. eg. `options` from the list controller. You can add as many props as you want from the type decleration.
+
+`eg`. to access the `minDate` prop from the `prop` we do `prop.minDate`, the minDate is defined in the mapping of the controller to the props of our block.
+
+`eg`
+
+```tsx
+    controllers: [
+      { name: 'date', type: 'datePicker', label: "Choose event date", minDate: new Date()  },
+    ],
+
+```
 
 ## Setting a type for our controller
 
@@ -57,6 +69,8 @@ import { ComponentType } from 'react';
 
 export type DatePickerT = {
   type: 'datePicker';
+  //options: object[];
+  //...more types if your controller need them and access them via the prop of the controller
 };
 
 //export type SecondControllerT = {
