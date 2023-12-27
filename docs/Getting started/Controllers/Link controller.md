@@ -39,7 +39,7 @@ export default function AddressBlock({addressLink, address}: PropsT) {
 
 import AddressBlock from '@/components/blocks/AddressBlock';
 
-const registeredBlocks: Block[] = [
+const registeredBlocks: BlockT<CustomControllerT>[] = [
  *****
   {
     component: AddressBlock

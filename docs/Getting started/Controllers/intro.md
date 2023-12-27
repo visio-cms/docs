@@ -34,7 +34,7 @@ export type BlockControllers = {
 
 In our `blocks_registry` file, we added something like this
 ```tsx
-const registeredBlocks: Block[] = [
+const registeredBlocks: BlockT<CustomControllerT>[] = [
   {
     ****
     controllers: [

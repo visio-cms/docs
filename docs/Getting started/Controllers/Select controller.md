@@ -6,7 +6,7 @@ sidebar_position: 11
 
 ## Overview
 
-Select elements offer the capability to dynamically influence the rendering of a component or apply conditional attributes based on the selected value of an option. This versatility allows you to leverage the returned value for various purposes within your application.
+Select controller offer the capability to dynamically influence the rendering of a component or apply conditional attributes based on the selected value of an option. This versatility allows you to leverage the returned value for various purposes within your application.
 
 In the following example, we'll explore how to dynamically adjust the position of an image based on the selection of options like "left" or "right" within a select element.
 
@@ -53,7 +53,7 @@ export default function MyFirstBlock({ title, alignment, subTitle, image }: Prop
 import MyFirstBlock from '@/components/blocks/MyFirstBlock';
 
 
-const registeredBlocks: Block[] = [
+const registeredBlocks: BlockT<CustomControllerT>[] = [
  *****
   {
     component: MyFirstBlock,

@@ -26,7 +26,7 @@ export default function TextBlock({ title}: PropsT) {
 
 import TextBlock from '@/components/blocks/TextBlock';
 
-const registeredBlocks: Block[] = [
+const registeredBlocks: BlockT<CustomControllerT>[] = [
  *****
   {
     component: TextBlock

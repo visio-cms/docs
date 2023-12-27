@@ -90,7 +90,7 @@ export default function Collections({ collections, title }: { collections: Colle
 
 import Collections from '@/components/blocks/Collections';
 
-const registeredBlocks: Block[] = [
+const registeredBlocks: BlockT<CustomControllerT>[] = [
  *****
   {
     component: HeroBlock

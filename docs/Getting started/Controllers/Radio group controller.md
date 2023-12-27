@@ -56,7 +56,7 @@ export default function MyFirstBlock({ title, alignment, subTitle, image }: Prop
 import MyFirstBlock from '@/components/blocks/MyFirstBlock';
 
 
-const registeredBlocks: Block[] = [
+const registeredBlocks: BlockT<CustomControllerT>[] = [
  *****
   {
     component: MyFirstBlock,

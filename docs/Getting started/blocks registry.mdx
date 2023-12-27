@@ -25,7 +25,7 @@ import { Block } from 'visio-cms';
 import MyFirstBlock from '@/components/blocks/MyFirstBlock';
 import { LayersIcon } from '@radix-ui/react-icons';
 
-const registeredBlocks: Block[] = [
+const registeredBlocks: BlockT<CustomControllerT>[] = [
   {
     component: MyFirstBlock,
     title: 'My First Block',
@@ -63,10 +63,10 @@ Let's explore the `registeredBlocks` array and decipher the significance of each
 
 ## Adding the blocks to the web page
 
-We can start adding our block the a web page. Visit http://localhost:3000/builder/index. You have to login with your visio cms email and password.
+We can start adding our block the a web page. Visit http://localhost:3000/builder/home. You have to login with your visio cms email and password.
 
 
-For the first time opening the builder after login, you will be asked to create a page. Enter your page name and slug. **NB** `/index` is always your home page of your website.
+For the first time opening the builder after login, you will be asked to create a page. Enter your page name and slug. **NB** `/home` is always your home page of your website.
 In the builder page, we can click on the plus icon and select our block in the command modal. Also we can search for it. 
 <img src={Video} />
 

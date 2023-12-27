@@ -32,7 +32,7 @@ You have to import `RenderRichText` from `visio-cms` to render the `HTML` conten
 
 import RichTextBlock from '@/components/blocks/RichTextBlock';
 
-const registeredBlocks: Block[] = [
+const registeredBlocks: BlockT<CustomControllerT>[] = [
  *****
   {
     component: RichTextBlock

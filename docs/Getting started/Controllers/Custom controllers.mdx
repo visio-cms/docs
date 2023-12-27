@@ -1,0 +1,100 @@
+---
+sidebar_position: 12
+---
+
+import Image from '../../../static/custom_controller.png'
+import Image2 from '../../../static/date_picke_custom_controller.png'
+
+# Custom controllers
+
+## Overview
+Visio CMS also offers a seamless and user-friendly experience for enhancing your web content through the integration of custom controllers. In addition to the built-in controllers, our platform empowers you to personalize and extend functionality by incorporating your own controllers. This feature opens up a realm of possibilities, allowing you to augment the attributes of your content blocks with ease.
+
+## Getting Started
+To begin leveraging the power of custom controllers in Visio CMS, locate the controllers folder under `/components/controllers` and add a new  react component `example below`
+
+```tsx title="/components/controllers/DatePickerController.tsx"
+'use client';
+import { Datepicker } from 'flowbite-react';
+import { RenderBlockControllerProps } from 'visio-cms';
+
+
+export default function DatePickerController({
+  prop,
+  propIndex,
+  defaultValue,
+  handlePropValueChange,
+}: RenderBlockControllerProps) {
+  return (
+    <div className="absolute w-full left-0 px-1 date-picker">
+      <Datepicker
+        onSelectedDateChanged={(date) => handlePropValueChange(date, propIndex, prop)}
+        defaultValue={defaultValue}
+      />
+    </div>
+  );
+}
+
+```
+
+## Integration with Date Picker Component
+
+The above component leverages a date picker component from [FlowBite](https://www.flowbite-react.com/docs/components/datepicker). We have created a simple date picker component that passes a date to our block component.
+
+In this integration, we utilize specific properties such as `prop`, `propIndex`, `defaultValue`, and `handlePropValueChange` from `RenderBlockControllerProps` provided by `visio-cms`. These properties are essential for visio to correctly pass the value of the selected date to the respective block.
+
+The `handlePropValueChange` function plays a crucial role in updating and passing the new date value to the block. The first argument, `date`, represents the new value we are assigning to the prop. It could be a string, object, array, React Node, etc.
+
+The `defaultValue` is a necessary value that we set back to the DatePicker's defaultValue whenever the block is selected. This enables us to adjust it as needed.
+
+
+## Setting a type for our controller
+
+In the `lib/types.ts` file, it is imperative to define a dedicated type for our controller. This ensures that visio can seamlessly recognize the controller type whenever we engage in the mapping process between the controller type and a corresponding prop.
+
+```ts title="/lib/types.ts"
+import { ComponentType } from 'react';
+
+export type DatePickerT = {
+  type: 'datePicker';
+};
+
+//export type SecondControllerT = {
+//  type: 'secondControllerType';
+//};
+
+
+//we need to make use of typescript Discriminating (|) Union any time we want to an additional controller
+//export type CustomControllerT = DatePickerT | SecondControllerT
+
+export type CustomControllerT = DatePickerT 
+
+export type CustomControllerType = CustomControllerT & {
+  component: ComponentType<any>;
+};
+```
+
+## Registering the controller
+
+Similar to blocks, we have to register our controller in the customControllers array in `/controllers/controller_registry.tsx` file then we can finally use it in our website. 
+
+```ts title="/lib/types.ts"
+import DatePickerController from './controllers/DatePickerController';
+import { CustomControllerType } from '@/lib/types';
+
+const customControllers: CustomControllerType[] = [
+  {
+    type: 'datePicker',
+    component: DatePickerController,
+  },
+];
+
+export default customControllers;
+
+```
+
+Now anytime we are mapping a controller to a prop, it shows in the intellesense of our code editor.
+<img src={Image}/>
+
+Aslo, in the controllers side bar of our our selected block, we should see our custom controller added
+<img src={Image2}/>

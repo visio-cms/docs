@@ -53,7 +53,7 @@ export default function HeroBlock({avatar}: PropsT) {
 
 import HeroBlock from '@/components/blocks/HeroBlock';
 
-const registeredBlocks: Block[] = [
+const registeredBlocks: BlockT<CustomControllerT>[] = [
  *****
   {
     component: HeroBlock

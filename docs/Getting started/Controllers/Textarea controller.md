@@ -26,7 +26,7 @@ export default function TextareaBlock({ content}: PropsT) {
 
 import TextareaBlock from '@/components/blocks/TextareaBlock';
 
-const registeredBlocks: Block[] = [
+const registeredBlocks: BlockT<CustomControllerT>[] = [
  *****
   {
     component: TextareaBlock

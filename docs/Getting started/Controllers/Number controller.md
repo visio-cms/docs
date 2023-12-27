@@ -26,7 +26,7 @@ export default function NumberBlock({ counter}: PropsT) {
 
 import NumberBlock from '@/components/blocks/NumberBlock';
 
-const registeredBlocks: Block[] = [
+const registeredBlocks: BlockT<CustomControllerT>[] = [
  *****
   {
     component: NumberBlock
