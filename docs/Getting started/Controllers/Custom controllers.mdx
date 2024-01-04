@@ -1,5 +1,5 @@
 ---
-sidebar_position: 12
+sidebar_position: 13
 ---
 
 import Image from '../../../static/custom_controller.png'
@@ -95,7 +95,7 @@ The `prop` allows us to access other props needed by the controller. eg. `option
 
 Similar to blocks, we have to register our controller in the customControllers array in `/controllers/controller_registry.tsx` file then we can finally use it in our website. 
 
-```ts title="/lib/types.ts"
+```ts title="/lib/controller_registry.ts"
 import DatePickerController from './controllers/DatePickerController';
 import { CustomControllerType } from '@/lib/types';
 
