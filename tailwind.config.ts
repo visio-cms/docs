@@ -26,6 +26,11 @@ export default {
     },
     typography: typographyStyles,
     extend: {
+      colors:{
+        brand: {
+           green: 'hsl(var(--visio-cms-brand-green))' 
+        }
+      },
       boxShadow: {
         glow: '0 0 4px rgb(0 0 0 / 0.1)',
       },
