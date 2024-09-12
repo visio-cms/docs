@@ -1,0 +1,33 @@
+# Side Editing prop
+Side editing props are controllers which are added to the `sideEditingProps`  array of each block `Schema` object. They specify the props that content creators can modify using the Visio sidebar controllers.
+
+A typical sideEditingProp should look like This
+
+```tsx
+
+type BasePropSchema<T = Record<string, any>> = {
+  propName: string;
+  label: string;
+  group?: string;
+  hide?: (inputs: T) => boolean;
+};
+
+```
+
+ <Properties>
+      <Property name="propName" type="string">
+        This represents the prop this controller is controlling.
+      </Property>
+
+       <Property name="type" type="SideEditingProps">
+        This represents the type of the controller. In this case it should be `image`.
+      </Property>
+
+      <Property name="label" type="string">
+        This represents the label of the controller input.
+      </Property>
+
+      <Property name="hide" type="(inputs: T) => boolean (optional)">
+        This is a function that takes the inputs / all the prop values of the block and returns a boolean. If the function returns true, the controller will be hidden.
+      </Property>
+    </Properties>

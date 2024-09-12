@@ -1,0 +1,66 @@
+# Image Controller
+With the image controller, content editors can directly modify images on the page and manage the value of an image prop within a block. The image controller is imported from `visio-cms-lib/Image` and integrated into the block component to display the image.
+<Row>
+  <Col>
+
+    ### Props
+
+    <Properties>
+      <Property name="propName" type="string">
+        This represents the prop this controller is controlling
+      </Property>
+
+       <Property name="defaultValue" type="MediaFile">
+        The default value of the image controller. This is normally defined in the `defaultPropValues` object of the block's `schema`. And shold be an object of type `MediaFile` imported from `visio-cms-lib/types`.
+
+        ```tsx
+        {
+          mediaHash: string; //can be the url of your image
+          altText: string;
+          width: number;
+          height: number;
+        }
+        ```
+      </Property>
+
+      <Property name="fallBackImage" type="string">
+        A fallback image url to be used when the image is not available.
+      </Property>
+
+      <Property name="wrapperClassName" type="string">
+        An optional class name to be added to the image wrapper.
+      </Property>
+
+       <Property name="renderImage" type="({ imagePublicUrl, altText, width, height, }) => JSX.Element">
+        A function that takes the image object as an argument and returns a JSX element to be rendered for the image.
+      </Property>
+
+      <Property name="pageBlockId" type="string">
+        A Required pageBlock id which is used to identify the block in the page. This is normally passed as a prop to your block component by the builder.
+        This should have a default value of an empty string.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    ```jsx
+     <Image
+        defaultValue={propValue}
+        pageBlockId={pageBlockId}
+        propName={`propName`}
+        wrapperClassName="relative"
+        fallbackImage="https://i0.wp.com/ourscene.org/wp-content/uploads/2022/01/placeholder-2.png?fit=1200%2C800&ssl=1&w=640"
+        renderImage={(logo) => (
+            <img
+                src={logo.imagePublicUrl}
+                alt={logo.altText}
+                width={logo.width}
+                height={logo.height}
+            />
+        )}
+    />
+    ```
+
+  </Col>
+</Row>

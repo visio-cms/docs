@@ -1,0 +1,267 @@
+# propName
+`propName` is a very `crutial` prop in every controller. This is responsible for mapping the controller to each prop of the block.
+
+Your `defaultValue` of your block is always an object, so the value of the `propName` should be the key of each property in the `defaultPropValues` object.
+
+Supposing our defaultvalue is a basic object like this:
+
+```tsx
+{
+    title: 'My title',
+    description: 'My description'
+}
+```
+
+Then we can have an in page [Text](/in-page-text-controller) controller or [RichText](/in-page-rich-text-editor-controller) controller for each keys like this:
+
+```tsx
+
+type BlockProps = {
+    title: string;
+    description: string;
+    pageBlockId?:string;
+}
+
+const MyBlock:Block<BlockProps> =({title, description, pageBlockId=''})=>{
+    return (
+        <div>
+            <Text propName={'title'} pageBlockId={pageBlockId} defaultValue={title} />
+            <RichTextEditor propName={'description'} pageBlockId={pageBlockId} defaultValue={description} />
+        </div>
+    )
+}
+
+```
+
+If we have a complete defaultValue which has nested objects like so
+
+```tsx
+{
+    hero: {
+        title: 'My title',
+        description: 'My description'
+    },
+    feature: {
+        title: 'My feature title',
+        description: 'My feature description'
+    }
+}
+```
+
+We can also use the same approach to map the controllers to the nested objects like so:
+
+```tsx
+
+type BlockProps = {
+    hero: {
+        title: string;
+        description: string;
+    },
+    feature: {
+        title: string;
+        description: string;
+    },
+    pageBlockId?:string;
+}
+
+const MyBlock:Block<BlockProps> =({hero, feature, pageBlockId=''})=>{
+    return (
+        <div>
+            <div>
+                <Text propName={'hero.title'} pageBlockId={pageBlockId} defaultValue={hero.title} />
+                <RichTextEditor propName={'hero.description'} pageBlockId={pageBlockId} defaultValue={hero.description} />
+            </div>
+            <div>
+                <Text propName={'feature.title'} pageBlockId={pageBlockId} defaultValue={feature.title} />
+                <RichTextEditor propName={'feature.description'} pageBlockId={pageBlockId} defaultValue={feature.description} />
+            </div>
+        </div>
+    )
+}
+
+```
+
+With even more complete nested objects with arrays like so:
+
+```tsx
+{
+    hero: {
+        title: 'My title',
+        description: 'My description'
+    },
+    features: [
+        {
+            title: 'My feature title',
+            description: 'My feature description'
+        },
+        {
+            title: 'My feature title',
+            description: 'My feature description'
+        }
+    ]
+}
+```
+
+We can also use the same approach to map the controllers to the nested objects like so:
+
+```tsx
+
+type BlockProps = {
+    hero: {
+        title: string;
+        description: string;
+    },
+    features: {
+        title: string;
+        description: string;
+    }[],
+    pageBlockId?:string;
+}
+
+const MyBlock:Block<BlockProps> =({hero, features, pageBlockId=''})=>{
+    return (
+        <div>
+            <div>
+                <Text propName={'hero.title'} pageBlockId={pageBlockId} defaultValue={hero.title} />
+                <RichTextEditor propName={'hero.description'} pageBlockId={pageBlockId} defaultValue={hero.description} />
+            </div>
+            <div>
+                <Text propName={'features.0.title'} pageBlockId={pageBlockId} defaultValue={feature[0]title} />
+                <RichTextEditor propName={'features.0.description'} pageBlockId={pageBlockId} defaultValue={features[0]description} />
+            </div>
+
+            <div>
+                <Text propName={'features.1.title'} pageBlockId={pageBlockId} defaultValue={feature[1]title} />
+                <RichTextEditor propName={'features.1.description'} pageBlockId={pageBlockId} defaultValue={features[1]description} />
+            </div>
+
+        </div>
+    )
+}
+
+```
+
+Dealing with arrays, we can use in combination with the [List](/in-page-list-controller) controller to map the array of objects to the controllers like so:
+
+```tsx
+
+type BlockProps = {
+    hero: {
+        title: string;
+        description: string;
+    },
+    features: {
+        title: string;
+        description: string;
+    }[],
+    pageBlockId?:string;
+}
+
+const MyBlock:Block<BlockProps> =({hero, features, pageBlockId=''})=>{
+    return (
+        <div>
+            <div>
+                <Text propName={'hero.title'} pageBlockId={pageBlockId} defaultValue={hero.title} />
+                <RichTextEditor propName={'hero.description'} pageBlockId={pageBlockId} defaultValue={hero.description} />
+            </div>
+            <List
+                pageBlockId={pageBlockId}
+                defaultPropValues={features || []}
+                propName="features"
+                className="mx-auto mt-8 flex max-w-xl flex-wrap justify-center gap-x-10 gap-y-8 lg:mx-0 lg:justify-start"
+                setListItemClassName={(item, index) => index == 0 ? `flex flex-col items-center` : `flex flex-col items-left`} // or  listItemClassName="flex"
+                renderComponent={(item, index) => (
+                    <div>
+                        <Text propName={`features.${index}.title`} pageBlockId={pageBlockId} defaultValue={item.title} />
+                        <RichTextEditor propName={`features.${index}.description`} pageBlockId={pageBlockId} defaultValue={item.description} />
+                    </div>
+                )}
+            />
+        </div>
+    )
+}
+
+```
+
+The same way we can combine many [List](/in-page-list-controller) controllers to map nested arrays of objects to the controllers like so:
+
+```tsx
+type BlockProps = {
+   navBar: {
+      navigations: {
+         title: string;
+         link: string;
+         subNavigations: {
+            title: string;
+            link: string;
+         }[];
+      }[];
+   }
+}
+
+const MyBlock:Block<BlockProps> =({navBar})=>{
+    return (
+        <div>
+            <List
+                pageBlockId={pageBlockId}
+                defaultPropValues={navBar.navigations}
+                propName="navBar.navigations"
+                renderComponent={(navigation, index) => (
+                    <div>
+                       <a href={navigation.link}>
+                        <Text propName={`navBar.navigations.${index}.title`} pageBlockId={pageBlockId} defaultValue={navigation.title} />
+                       </a>
+                        <List
+                            pageBlockId={pageBlockId}
+                            defaultPropValues={item.subNavigations}
+                            propName={`navBar.navigations.${index}.subNavigations`}
+                            renderComponent={(subNavigation, subNavigationIndex) => (
+                                <div>
+                                    <a href={subNavigation.link}>
+                                    <Text propName={`navBar.navigations.${index}.subNavigations.${subNavigationIndex}.title`} pageBlockId={pageBlockId} defaultValue={subNavigation.title} />
+                                    </a>        
+                                </div>
+                            )}
+                        />
+                    </div>
+                )}
+            />
+        </div>
+    )
+}
+```
+
+## List Schema with propName 
+
+When a list is added to our block, we need to define / register the list in the side bar. This is done by adding a `lists` key to the block's schema object. The `lists` key is an array of List that define the schema and registers a list in the builder. Having done this, any time a list or list item is selected in the page, the list's controls will be displayed in the builder's sidebar under the `properties tab` which will give us the controls to `add`, `remove`, `move up` and `move down` the list items.
+
+When defining the propName in the sublist schema, we ignore the `index` because we are  telling the builder the `key` the sublist is mapped to in each list item of it's parent.
+And when editing the props of each sublist item from the side bar using the sideEditingProps, the builder is smart enough the exact item index you are editing.
+
+```tsx {{ title: 'Bock Schema' }}
+{
+    ...,
+    lists: [
+        {
+            propName: 'navBar.navigations',
+            label: 'Navigation',
+            defaultValue: {
+                title: 'New Navigation',
+                link: 'https://new-navigation.com'
+            },
+            sideEditingProps: [],
+            subLists: [
+                {
+                    propName: 'navBar.navigations.subNavigations',
+                    label: 'Sub Navigation',
+                    defaultValue: {
+                        title: 'New Sub Navigation',
+                        link: 'https://new-sub-navigation.com'
+                    },
+                    sideEditingProps: [],
+                }
+            ]
+        }
+    ]
+}
+```

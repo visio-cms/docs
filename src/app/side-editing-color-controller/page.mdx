@@ -1,0 +1,52 @@
+# Color Controller
+This is a color picker which returns a color code in hex format. It shows in the side bar under the `properties` tab. This returns a `Color` object.
+
+```tsx
+type Color = {
+  colorHex: string;
+  colorName: string;
+  id: string;
+};
+```
+
+to render the color in your component,  call the `getColor` function from `visio-cms-lib/utils` and pass the `Color` object as the argument.
+
+This function makes sure the color is rendered correctly when it's reference from a color scheme in your themes tab.
+
+<Row>
+  <Col>
+
+      ### keys
+
+    <Properties>
+      <Property name="propName" type="string">
+        This represents the prop this controller is controlling.
+      </Property>
+
+       <Property name="type" type="SideEditingProps">
+        This represents the type of the controller. In this case it should be `color`.
+      </Property>
+
+      <Property name="label" type="string">
+        This represents the label of the controller input.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    ```jsx {{title: 'Schema'}}
+       {
+        ...,
+        sideEditingProps: [
+            {
+                propName: 'propName',
+                type: 'color',
+                label: 'Choose background color'
+            }
+        ]
+       }
+    ```
+
+  </Col>
+</Row>

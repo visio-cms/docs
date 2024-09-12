@@ -1,0 +1,51 @@
+# List Schema
+When a list is added to our block, we need to define / register the list in the side bar. This is done by adding a `lists` key to the block's schema object. The `lists` key is an array of List that define the schema and registers a list in the builder. Having done this, any time a list or list item is selected in the page, the list's controls will be displayed in the builder's sidebar under the `properties tab` which will give us the controls to `add`, `remove`, `move up` and `move down` the list items.
+
+<Row>
+  <Col>
+
+    ### Props
+
+    <Properties>
+      <Property name="propName" type="string">
+        This represents the prop this controller is controlling.
+      </Property>
+
+      <Property name="label" type="string">
+         This is the label which represents each list item in the builder's sidebar. eg. 'Feature', 'Item', 'Section' etc.
+         Then the side bar will show 'Add Feature', 'Add Item', 'Add Section' etc.
+      </Property>
+
+      <Property name="defaultValue" type="string, array, object, boolean, number">
+         This is the value appended to the list when the `add` button is clicked in the builder's sidebar.
+      </Property>
+
+      <Property name="sideEditingProps" type="SideEditingProps[]">
+          This is a side editing prop or controller which controls the value of each list item.
+      </Property>
+
+       <Property name="subLists" type="ListSchema[]">
+          If the list contains other list in it's `renderComponent function`, we consider it as a sublist, there for we need to define the schema and register it in the subLists array. A sublist can also contain sublists. 
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+     ```tsx {{ title: 'Bock Schema' }}
+        {
+            ...,
+            lists: [
+                {
+                    propName: 'propName',
+                    label: '....',
+                    defaultValue: {},
+                    sideEditingProps: [],
+                    subLists: []
+                }
+            ]
+        }
+        ```
+
+  </Col>
+</Row>

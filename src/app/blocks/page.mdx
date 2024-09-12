@@ -1,0 +1,148 @@
+export const metadata = {
+  title: 'Blocks',
+  description:
+    'This guid will get you all set up with blocks and how to use them in your project.',
+}
+
+# Blocks
+
+
+Consider blocks as sections that come together to form a webpage. In Visio, as a developer, your primary task is to build and export blocks, which are React components with props serving as placeholders for values controlled by the Visio sidebar controllers. These blocks can then be added by content creators and marketers to construct a webpage. With props, you have the flexibility to modify various attributes of a block. For example, you can change the styling of an element, insert and adjust an image, modify colors, adjust font size, and render lists, among other capabilities.
+
+## Let's add a block to our website
+
+in your `app/(viios)/blocks` folder, add a new file and call it MyFirstBlock.tsx and paste the below code
+
+```tsx {{title:"/app/(visio)/blocks/MyFirstBlock.tsx"}}
+
+import Image from 'next/image';
+import { Block, MediaFile, Color } from "visio-cms-lib/types";
+import Text from 'visio-cms-lib/Text';
+import VisioImage from 'visio-cms-lib/Image';
+import RichTextEditor from "visio-cms-lib/RichText";
+import {getColor} from 'visio-cms-lib/utils';
+
+type PropsT = {
+  title: string;
+  subTitle: string;
+  image: MediaFile;
+  backgroundColor: Color;
+  pageBlockId?: string;
+};
+
+const MyFirstBlock:Block<PropsT>({ title, subTitle, image, color, pageBlockId='' }) {
+  return (
+    <div className="text-center md:flex py-10 justify-center" style={{backgroundColor: getColor(color)}}>
+      <div className="grid p-4 place-items-center mb-3 md:mb-0  md:w-1/2 flex-shrink-0">
+        <div className="text-left w-full lg:p-36 ">
+          <h1 className="text-4xl pb-5">
+             <Text pageBlockId={pageBlockId} propName="title" defaultValue={title} />
+          </h1>
+          <RichTextEditor pageBlockId={pageBlockId} propName="subTitle" defaultValue={subTitle} />
+        </div>
+      </div>
+      <div className="w-full md:w-1/2 p-4">
+         <VisioImage
+            defaultValue={image}
+            pageBlockId={pageBlockId}
+            propName="image"
+            fallbackImage="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            renderImage={({ imagePublicUrl, altText }) => (
+                <Image alt={altText} src={`${imagePublicUrl}`} width={100} height={10}  />
+             )}
+            />
+      </div>
+    </div>
+  );
+}
+
+MyFirstBlock.Schema= {
+    name: 'My first block',
+    id: 'myFirstBlock',
+    defaultPropValues: {
+        title: 'This is the title',
+        subTitle: 'This is the subtitle',
+        image: {
+            altText: 'This is the alt text',
+            mediaHash: 'https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600',
+            width: 100,
+            height: 100,
+        },
+    },
+    sideEditingProps: [
+        {
+            propName: 'backgroundColor',
+            type: 'color',
+            lable: 'Background color',
+        }
+    ]
+}
+
+export default MyFirstBlock;
+
+```
+
+Here, we've crafted a straightforward block with `title`, `subTitle`, `image` and `backgroundColor` props. To begin utilizing this block on our website, we should register it in the `/app/(visio)/blocks/index.tsx` file. This registration process enables us to seamlessly incorporate the block into our webpages.
+```tsx {{title:"/app/(visio)/blocks/index.tsx"}}
+import { BlockList } from 'visio-cms-lib/types';
+import MyFirstBlock from './MyFirstBlock';
+
+const blocks = [MyFirstBlock] as unknown as BlockList[];
+export default blocks;
+
+```
+
+## Schema
+
+The `Schema` object is a crucial part of the block. It defines the block's name, ID, default prop values, and side editing props. The `name` and `id` properties are essential for identifying the block in the Visio sidebar. The `defaultPropValues` object contains the default values for the block's props. The `sideEditingProps` array specifies the props that content creators can modify using the Visio sidebar controllers.
+
+
+
+
+<Row>
+  <Col>
+
+    ### Schema keys
+
+    <Properties>
+      <Property name="name" type="string">
+        This represents the name of the block.
+      </Property>
+
+       <Property name="id" type="string">
+        Unique identifier for the block.
+      </Property>
+
+      <Property name="defaultPropValues" type="object">
+        Default values for the block's props.
+      </Property>
+
+      <Property name="sideEditingProps" type="SideEditingProps[]">
+        Props that content creators can modify using the Visio sidebar controllers.
+      </Property>
+
+      <Property name="lists" type="ListSchema[]" optional>
+        Optionally needed only if your block contains  [List](/in-page-list-controller) controllers. This defines the schema of the list controllers.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    ```tsx {{ title: 'Schema' }}
+      {
+        name: '...',
+        id: '...',
+        defaultPropValues: {},
+        sideEditingProps: [],
+        lists: []
+    }
+    ```
+
+  </Col>
+</Row>
+
+
+### In page controllers / editing props
+
+To modify the block's props, content creators can use the Visio sidebar controllers. For instance, they can adjust the `title`, `subTitle`, `image`, and `backgroundColor` of the `MyFirstBlock` component. The `Text`, `RichTextEditor`, and `VisioImage` components are used to render the block's props, allowing content creators to customize the block's content directly in the web page just like editing a doucument in Microsft word.

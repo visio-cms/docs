@@ -1,0 +1,45 @@
+# Link Controller
+
+The Link Controller enables content editors to link pages or external URLs to your components. It appears in the sidebar under the `properties` tab.
+
+To retrieve the correct URL of the selected page, use the `getLink` function from `visio-cms-lib/utils`, passing the `link value` as the argument. This function returns a valid URL with the active locale appended to it. Additionally, when the project is in builder mode, it returns `#`. If a linked page's slug changes, the function automatically updates the link with the new slug, ensuring there are no broken links in your project.
+
+
+
+<Row>
+  <Col>
+
+      ### keys
+
+    <Properties>
+      <Property name="propName" type="string">
+        This represents the prop this controller is controlling.
+      </Property>
+
+       <Property name="type" type="SideEditingProps">
+        This represents the type of the controller. In this case it should be `link`.
+      </Property>
+
+      <Property name="label" type="string">
+        This represents the label of the controller input.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    ```jsx {{title: 'Schema'}}
+       {
+        ...,
+        sideEditingProps: [
+            {
+                propName: 'propName',
+                type: 'link',
+                label: 'Link to page'
+            }
+        ]
+       }
+    ```
+
+  </Col>
+</Row>

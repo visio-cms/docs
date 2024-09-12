@@ -1,0 +1,50 @@
+# Switch Controller
+The switch controller is used to control a `boolean` value. It shows in the side bar under the `properties` tab.
+
+<Row>
+  <Col>
+
+      ### keys
+
+    <Properties>
+      <Property name="propName" type="string">
+        This represents the prop this controller is controlling.
+      </Property>
+
+       <Property name="type" type="SideEditingProps">
+        This represents the type of the controller. In this case it should be `swtich`.
+      </Property>
+
+      <Property name="label" type="string">
+        This represents the label of the controller input.
+      </Property>
+
+       <Property name="onLabel" type="string (optional)">
+        This shows up when the switch is turned on.
+      </Property>
+
+       <Property name="offLabel" type="string (optional)">
+        This shows up when the switch is turned off.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    ```jsx {{title: 'Schema'}}
+       {
+        ...,
+        sideEditingProps: [
+            {
+                propName: 'propName',
+                type: 'switch',
+                label: 'Show counter',
+                onLabel: 'Yes',
+                offLabel: 'No'
+            }
+        ]
+       }
+    ```
+
+  </Col>
+</Row>

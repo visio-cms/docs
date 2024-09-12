@@ -1,0 +1,62 @@
+# Custom Controller
+There may be times when you need a custom component to control a prop in your component, such as a `Date picker`, `Range slider`, or `Custom form builder`, which aren't included in the default controllers. In these situations, you can create a custom controller and incorporate it into sideEditingProps.
+
+
+<Row>
+  <Col>
+
+    ### keys
+
+    <Properties>
+      <Property name="propName" type="string">
+        This represents the prop this controller is controlling.
+      </Property>
+
+       <Property name="type" type="SideEditingProps">
+        This represents the type of the controller. In this case it should be `custom`.
+      </Property>
+
+      <Property name="component" type="React.FC<any>">
+        This represents the custom component you want to use as a controller. by default the builder will pass `onChange` and `defaultValue` props to the component.
+      </Property>
+
+      <Property name="componentProps" type="Record<string, any> (optional)">
+         These are additional props you want to pass to the custom component.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    
+
+    ```jsx {{title: 'Schema'}}
+
+       function CustomController({ onChange, defaultValue, maximumDate, minimumDate }) {
+          return (
+            <div>
+                <input type="date" max={maximumDate} min={minimumDate} defaultValue={defaultValue} onChange={(e) => onChange(e.target.value)} />
+            </div>
+          );
+        }
+
+       {
+        ...,
+        sideEditingProps: [
+            {
+                propName: 'propName',
+                type: 'custom',
+                component: CustomController,
+                label: 'Select a date',
+                componentProps: {
+                  maximumDate: new Date('2022-12-31'),
+                  minimumDate: new Date('2021-01-01'),
+                  label: 'Select a date'
+                }
+            }
+        ]
+       }
+    ```
+
+  </Col>
+</Row>

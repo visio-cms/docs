@@ -1,0 +1,51 @@
+# Radio group Controller
+The radio group controller is used to control a `string` value. This comes with options and returns the value of the option selected as string. It shows in the side bar under the `properties` tab.
+
+<Row>
+  <Col>
+
+       ### keys
+
+    <Properties>
+      <Property name="propName" type="string">
+        This represents the prop this controller is controlling.
+      </Property>
+
+       <Property name="type" type="SideEditingProps">
+        This represents the type of the controller. In this case it should be `radio-group`.
+      </Property>
+
+      <Property name="label" type="string">
+        This represents the label of the controller input.
+      </Property>
+
+       <Property name="options" type="{label: string, value: stirng}[]">
+        This represents the options for the radio group. It should be an array of objects with `label` and `value` keys.
+      </Property>
+
+       
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    ```jsx {{title: 'Schema'}}
+       {
+        ...,
+        sideEditingProps: [
+            {
+                propName: 'propName',
+                type: 'radio-group',
+                label: 'Choose an option',
+                options: [
+                  {label: 'Option 1', value: 'option1'},
+                  {label: 'Option 2', value: 'option2'},
+                  {label: 'Option 3', value: 'option3'}
+                ]
+            }
+        ]
+       }
+    ```
+
+  </Col>
+</Row>

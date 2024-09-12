@@ -1,0 +1,41 @@
+# Number Controller
+Similar to  text controller, this controls a `number` but shows in the side bar under the `properties` tab.
+
+
+<Row>
+  <Col>
+
+      ### keys
+
+    <Properties>
+      <Property name="propName" type="string">
+        This represents the prop this controller is controlling.
+      </Property>
+
+       <Property name="type" type="SideEditingProps">
+        This represents the type of the controller. In this case it should be `number`.
+      </Property>
+
+      <Property name="label" type="string">
+        This represents the label of the controller input.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    ```jsx {{title: 'Schema'}}
+       {
+        ...,
+        sideEditingProps: [
+            {
+                propName: 'propName',
+                type: 'number',
+                label: 'Enter counter initial value'
+            }
+        ]
+       }
+    ```
+
+  </Col>
+</Row>

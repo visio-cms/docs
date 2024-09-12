@@ -1,0 +1,55 @@
+# Select Controller
+The select controller is used to control a `string` value. This comes with options as dropdown and returns the value of the option selected as string. It shows in the side bar under the `properties` tab.
+<Row>
+  <Col>
+
+      ### keys
+
+    <Properties>
+      <Property name="propName" type="string">
+        This represents the prop this controller is controlling.
+      </Property>
+
+       <Property name="type" type="SideEditingProps">
+        This represents the type of the controller. In this case it should be `select`.
+      </Property>
+
+      <Property name="label" type="string">
+        This represents the label of the controller input.
+      </Property>
+
+       <Property name="options" type="{label: string, value: stirng}[]">
+        This represents the options for the radio group. It should be an array of objects with `label` and `value` keys.
+      </Property>
+
+     <Property name="placeholder" type="string (optional)">
+        This represents the placeholder for the select input. When no item is selected, this will be shown.
+      </Property>
+
+
+       
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    ```jsx {{title: 'Schema'}}
+       {
+        ...,
+        sideEditingProps: [
+            {
+                propName: 'propName',
+                type: 'select',
+                label: 'Choose your gender',
+                options: [
+                    {label: "Male", value: 'male'},
+                    {label: 'Female', value: 'female'},
+                    {label: 'Other', value: 'other'}
+                ]
+            }
+        ]
+       }
+    ```
+
+  </Col>
+</Row>

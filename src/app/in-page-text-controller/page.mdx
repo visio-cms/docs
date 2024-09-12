@@ -1,0 +1,36 @@
+# Text Controller
+The text controller includes an editor that enables content editors to directly modify text on the page and manage the value of a text prop within a block. It is imported from visio-cms-lib/Text and integrated into the block component to display the text.
+
+<Row>
+  <Col>
+
+    ### Props
+
+    <Properties>
+      <Property name="propName" type="string">
+        This represents the prop this controller is controlling.
+      </Property>
+
+       <Property name="defaultValue" type="string">
+        The default value of the text input field. This is normally defined in the `defaultPropValues` object of the block's `schema`.
+      </Property>
+
+      <Property name="pageBlockId" type="string">
+        A Required pageBlock id which is used to identify the block in the page. This is normally passed as a prop to your block component by the builder.
+        This should have a default value of an empty string.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+    ```jsx
+      <Text 
+       propName={'propName'} 
+       pageBlockId={pageBlockId} 
+       defaultValue={propName} 
+       />
+    ```
+
+  </Col>
+</Row>

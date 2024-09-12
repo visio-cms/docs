@@ -1,0 +1,108 @@
+# List Controller
+The list controller makes it easier to map and render a `list` or `array` of items in the page, it comes with controls which makes it easier to manupulate the array
+eg. `add`, `remove` and `re-order` the items in the array . 
+
+It is imported from `visio-cms-lib/List` and integrated into the block component to display the list.
+
+The `List` component is a recursive component that can render nested lists in it's `renderComponent` prop.
+
+<Row>
+  <Col>
+
+    ### Props
+
+    <Properties>
+      <Property name="propName" type="string">
+        This represents the prop this controller is controlling.
+      </Property>
+
+       <Property name="defaultPropValues" type="array">
+        The default value of the list. This is normally defined in the `defaultPropValues` object of the block's `schema`.
+      </Property>
+
+      <Property name="component" type="string">
+         By default the list is an `ul` element, you can pass in a custom component to be used as the list container.
+      </Property>
+
+        <Property name="className" type="string">
+            An optional class name to be added to the list container.
+        </Property>
+    
+        <Property name="itemComponent" type="string">
+            By default the list item is a `li` element, you can pass in a custom
+        </Property>
+
+        <Property name="listItemClassName" type="string">
+            An optional class name to be added to all list items.
+        </Property>
+
+         <Property name="setListItemClassName" type="(value: T, index: number) => JSX.Element">
+            A function that takes the item and index as arguments and returns a class name to be added to each list item.
+
+            mostly used when you want to add a different class to the first or last item in the list.
+        </Property>
+
+         <Property name="renderComponent" type="(value: T, index: number) => JSX.Element">
+            A function that takes the item and index as arguments and returns a JSX element to be rendered for each list item.
+        </Property>
+
+      <Property name="pageBlockId" type="string">
+        A Required pageBlock id which is used to identify the block in the page. This is normally passed as a prop to your block component by the builder.
+        This should have a default value of an empty string.
+      </Property>
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+  ```jsx
+    type BlockProps = {
+        features: {
+            title: string;
+            description: string;
+        }[];
+    }
+  ```
+
+    ```jsx
+      <List
+        pageBlockId={pageBlockId}
+        defaultPropValues={features || []}
+        propName="features"
+        className="mx-auto mt-8 flex max-w-xl flex-wrap justify-center gap-x-10 gap-y-8 lg:mx-0 lg:justify-start"
+        setListItemClassName={(item, index) => index == 0 ? `flex flex-col items-center` : `flex flex-col items-left`} // or  listItemClassName="flex"
+        renderComponent={(item, index) => (
+           <div>
+              <h1>{item.title}</h1>
+              <p>{item.description}</p>
+           </div>
+        )}
+    />
+    ```
+
+  </Col>
+
+  <Col>
+    When a `List` Controller is used in a block, the `lists` key in the block [Schema](/blocks#schema) should be introduced where you define the schema of the list items.
+    Learn more about the [List schema](/list-schema). here
+
+      ```tsx {{ title: 'Bock Schema' }}
+        {
+            ...,
+            lists: [
+                {
+                    propName: 'features',
+                    label: 'Feature',
+                    defaultValue: {
+                        title: 'New Feature',
+                        description: 'The description of the new feature'
+                    },
+                    sideEditingProps: [],
+                }
+            ]
+        }
+        ```
+  </Col>
+</Row>
+
+
