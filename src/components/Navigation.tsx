@@ -270,6 +270,8 @@ export const navigation: Array<NavGroup> = [
       { title: 'getImageUrl', href: '/utility-functions-get-Image-url'},
       { title: 'getParams', href: '/utility-functions-get-params'},
       { title: 'getProjectMode', href: '/utility-functions-get-project-mode'},
+      { title: 'getPageMetaData', href: '/utility-functions-get-page-meta-data'},
+      { title: 'getPageBlocks', href: '/utility-functions-get-page-blocks'},
     ]
   },
   {

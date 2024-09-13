@@ -1,0 +1,19 @@
+# getPageMetaData
+To get the page meta data, just call the `getPageMetaData` function. You have to pass the `slug`, `supabaseAnnonKey`, `supabaseProjectUrl` and `locale` as arguments. The function returns a `PageMeta` object.
+
+The `params` contains the locale and all the params in the `slug`.
+
+The `error` contains a string data of the error message if the page is not found.
+
+```tsx {{title: 'return type'}}
+    type PageMeta = Promise<{
+        seo: {
+            title: string;
+            description: string;
+            keywords: string;
+            featuredImage?: string;
+        }
+        params: { [key: string]: any };
+        error?: string;
+    }>;
+```

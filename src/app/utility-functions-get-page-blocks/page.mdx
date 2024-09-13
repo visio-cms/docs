@@ -1,0 +1,19 @@
+# getPageBlocks
+To get the page's glocks, just call the `getPageBlocks` function. You have to pass the `slug`, `supabaseAnnonKey`, `supabaseProjectUrl` and `locale` as arguments. The function returns a `PageData` object.
+
+The `params` contains the locale and all the params in the `slug`.
+
+The `error` contains a string data of the error message if the page is not found.
+
+```tsx {{title: 'return type'}}
+    type PageData = {
+        pageBlocks: PageBlock[];
+        pages: Page[];
+        projectConfiguration: {
+            globalBlocks: ProjectConfiguration['globalBlocks'];
+            theme: ProjectConfiguration['theme'];
+            scripts: { head: string; body: string };
+        };
+        params: { [key: string]: any };
+    };
+```
