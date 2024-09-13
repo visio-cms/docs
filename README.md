@@ -1,46 +1,124 @@
-# Protocol
+# Project Setup Instructions
 
-Protocol is a [Tailwind UI](https://tailwindui.com) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
+Follow these steps to set up and deploy the project using Supabase, Docker, and Next.js.
 
-## Getting started
+---
 
-To get started with this template, first install the npm dependencies:
+## Prerequisites
+
+- **Supabase Account**: Set up an account at [supabase](https://supabase.com/) and create a project.
+- **Docker Desktop**: [Install Docker Desktop](https://www.docker.com/products/docker-desktop).
+- **Supabase CLI**: [Install Supabase CLI](https://supabase.com/docs/guides/cli).
+- **Resend Account**: Set up an account at [Resend](https://resend.com).
+- **Unplash Account**: Set up an account at [Unsplash](https://unsplash.com/).
+
+---
 
 ```bash
-npm install
+npx create-visio-cms-app@latest
 ```
 
-Next, run the development server:
+## Setup Steps
+
+### 1. Link Supabase Project
+
+Link your local environment to your Supabase project with the following command:
+
+```bash
+supabase login
+supabase link
+```
+
+### 2. Run migrations
+
+```bash
+supabase db push
+```
+
+From your supabase storage change the `media` storage to public
+
+### 3. Start docker
+
+start docker desktop
+
+### 4. Deploy supabase edge functions
+
+```bash
+supabase functions deploy
+```
+
+### 4. Set Supabase Secrets
+
+```bash
+cp supabase/.env.example supabase/.env
+```
+
+past your resend api key in the `supabase/.env` file
+
+```js
+RESEND_API_KEY=[YOUR-RESEND-API-KEY-HERE]
+```
+
+### 5. Deploy your secret to supabase
+
+```bash
+supabase secrets set --env-file ./supabase/.env
+```
+
+### 6. link resend to supabase
+
+[https://resend.com/settings/integrations](https://resend.com/settings/integrations)
+
+
+### 7. update next.config.ts to accept served media files
+
+```js
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "[YOUR-SUPABASE-PROJECT-ID].supabase.co",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "**",
+      },
+    ],
+  },
+};
+```
+
+### 8. set up `pg_cron` and `pg_net` extensions
+
+Database > extensions
+Search and enable `pg_cron` and `pg_next`
+
+### 9. Add your supabase and unsplash keys to `.env`
+
+```bash
+cp .env.example .env
+```
+
+```js
+NEXT_PUBLIC_SUPABASE_PROJECT_ID=
+NEXT_PUBLIC_SUPABASE_ANONKEY=
+NEXT_PUBLIC_UNSPLASH_ACCESSKEY=
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_EMAIL_SENDER="sender-id your-email"
+```
+
+### 10. run your app and register as an admin
 
 ```bash
 npm run dev
 ```
 
-Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
+`localhost:3000/cms/register`
 
-## Customizing
+Confirm your email address and login
 
-You can start editing this template by modifying the files in the `/src` folder. The site will auto-update as you edit these files.
+`localhost:300/cms/login`
 
-## Global search
-
-This template includes a global search that's powered by the [FlexSearch](https://github.com/nextapps-de/flexsearch) library. It's available by clicking the search input or by using the `⌘K` shortcut.
-
-This feature requires no configuration, and works out of the box by automatically scanning your documentation pages to build its index. You can adjust the search parameters by editing the `/src/mdx/search.mjs` file.
-
-## License
-
-This site template is a commercial product and is licensed under the [Tailwind UI license](https://tailwindui.com/license).
-
-## Learn more
-
-To learn more about the technologies used in this site template, see the following resources:
-
-- [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
-- [Next.js](https://nextjs.org/docs) - the official Next.js documentation
-- [Headless UI](https://headlessui.dev) - the official Headless UI documentation
-- [Framer Motion](https://www.framer.com/docs/) - the official Framer Motion documentation
-- [MDX](https://mdxjs.com/) - the official MDX documentation
-- [Algolia Autocomplete](https://www.algolia.com/doc/ui-libraries/autocomplete/introduction/what-is-autocomplete/) - the official Algolia Autocomplete documentation
-- [FlexSearch](https://github.com/nextapps-de/flexsearch) - the official FlexSearch documentation
-- [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction) - the official Zustand documentation
