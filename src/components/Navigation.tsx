@@ -240,7 +240,7 @@ export const navigation: Array<NavGroup> = [
     ],
   },
   {
-    title: 'In page editing props / controllers',
+    title: 'In page prop editors',
     links: [
       { title: 'Text', href: '/in-page-text-controller'},
       { title: 'Rich Text Editor', href: '/in-page-rich-text-editor-controller'},
@@ -249,7 +249,7 @@ export const navigation: Array<NavGroup> = [
     ]
   },
   {
-    title: 'Side editing props / controllers',
+    title: 'Side prop editors',
     links: [
       { title: 'Text', href: '/side-editing-text-controller'},
       { title: 'Number', href: '/side-editing-number-controller'},
@@ -260,6 +260,16 @@ export const navigation: Array<NavGroup> = [
       { title: 'Select', href: '/side-editing-select-controller'},
       { title: 'Link', href: '/side-editing-link-controller'},
       { title: 'Custom', href: '/side-editing-custom-controller'},
+    ]
+  },
+  {
+    title: 'Utility functions',
+    links: [
+      { title: 'getColor', href: '/utility-functions-get-color'},
+      { title: 'getLink', href: '/utility-functions-get-link'},
+      { title: 'getImageUrl', href: '/utility-functions-get-Image-url'},
+      { title: 'getParams', href: '/utility-functions-get-params'},
+      { title: 'getProjectMode', href: '/utility-functions-get-project-mode'},
     ]
   },
   {

@@ -1,0 +1,38 @@
+# getLink
+The `getLink` function is used to get the link value from the `link` controller. The value of the `link` can be an absolute or relative path or a page id.
+By default, the link controller returns the `id` of the page. The `getLink` function is used to get the actual link value of the page.
+
+```jsx  
+
+import { getLink } from 'visio-cms-lib/utitls';
+import {Block} from 'visio-cms-lib/types';
+
+type Props = {
+   cta: {
+    href: string;
+    text: string;
+   }
+}
+
+const MenuItem:Block<Props> = ({cta}) => {
+  return (
+    <a href={getLink(cta.href)}>{cta.text}</a>
+  )
+}
+
+MenuItem.Schema = {
+   ....,
+   defaultValues:{
+     cta: {href: '/home', text: 'Home'}
+   },
+   sideEditingProps: [
+    {
+      propName: 'cta.href',
+      type: 'link',
+      label: 'Link to page',
+    },
+   ]
+}
+
+
+```

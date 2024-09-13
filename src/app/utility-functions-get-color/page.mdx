@@ -1,0 +1,35 @@
+# getColor
+Use the getColor function in combition with the `color` controller and `Color` type to get the color value. Every color has an `id` which makes it easier and smater for visio to reference 
+theme colors. The `colorHex` is returned if the `id` is not found in the theme colors. When in 
+
+```jsx  
+
+import { getColor } from 'visio-cms-lib/utitls';
+import {Color,Block} from 'visio-cms-lib/types';
+
+type Props = {
+  color: Color;
+}
+
+const ColorComponent:Block<Props> = ({color}) => {
+  return (
+    <div style={{backgroundColor: getColor(color)}} className="h-9 w-full">This is a color</div>
+  )
+}
+
+ColorComponent.Schema = {
+   ....,
+   defaultValues:{
+     color: {colorHex: '#000000', colorName: 'black', id: 'black'}
+   },
+   sideEditingProps: [
+    {
+      propName: 'color',
+      type: 'color',
+      label: 'Change background color',
+    },
+   ]
+}
+
+
+```

@@ -1,0 +1,30 @@
+# getParams
+When dealing with parameterized slugs, the `getParams` function can be used to extract parameters from the URL. By default, this function returns an object containing the selected `locale` of your website. The `locale` value is always a string and reflects the selected locale when the project is in `BUILDER` or `PREVIEW` mode.
+
+Supposing we have a page with this slug, `products/:productId/:color`, the `getParams` function can be used to extract the `productId` and `color` parameters from the URL.
+
+```jsx  
+
+import { getParams } from 'visio-cms-lib/utitls';
+import {Block} from 'visio-cms-lib/types';
+
+
+type Params = {
+  productId: string;
+  color: string;
+  locale:  string //only needed if you want to get the locale
+}
+
+const MyBlock:Block = () => {
+  const {productId, color, locale} = getParams<Params>();
+
+  //fetch product
+
+  cosnt data = {/**contains product data */} 
+  return (
+    <ProductDetailsComponent data={data}>
+  )
+}
+
+
+```
