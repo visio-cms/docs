@@ -1,0 +1,56 @@
+# Slot
+`Blocks` can also act as wrappers for other blocks, making them useful for building templates where content editors define the structure of it's conent. 
+To achieve this, we use the `Slot` component within the `block`. The `Slot` serves as a container that holds an array of `Page blocks` and renders them in the order they are specified.
+
+<Row>
+  <Col>
+
+    ### Props
+
+    <Properties>
+      <Property name="propName" type="string">
+        This represents the prop this slot is controlling.
+      </Property>
+
+      <Property name="defaultValue" type="PageBlock[]">
+        The default value of the slot. This is normally defined in the `defaultPropValues` object of the block's `schema`. And this case it should be an array of `PageBlock[]`
+      </Property>
+
+      <Property name="pageBlockId" type="string">
+        A Required pageBlock id which is used to identify the block in the page. This is normally passed as a prop to your block component by the builder.
+        This should have a default value of an empty string.
+      </Property>
+
+      <Property name="allowedBlockIds" type="string[] (optional)">
+         This is an array of block ids which are allowed to be dropped in the slots, if not provided all blocks are allowed.
+      </Property>
+
+      <Property name="className" type="string (optional)">
+         Obviously the className of the wrapper of the slot.
+      </Property>
+
+      <Property name="direction" type="horizontal | vertifical (optional)">
+         This is the flex direction of the blocks in the slot, default is vertifical which is `flex-col`.
+      </Property>
+
+    </Properties>
+
+  </Col>
+  <Col sticky>
+
+
+  ```jsx
+      import Slot from 'visio-cms-lib/Slot';
+    ```
+
+    ```jsx
+      <Slot 
+       propName={'propName'} 
+       pageBlockId={pageBlockId} 
+       defaultValue={propName} 
+       allowedBlockIds={['header', 'footer']}
+       />
+    ```
+
+  </Col>
+</Row>

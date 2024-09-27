@@ -246,6 +246,7 @@ export const navigation: Array<NavGroup> = [
       { title: 'Rich Text Editor', href: '/in-page-rich-text-editor-controller'},
       { title: 'Image', href: '/in-page-image-controller'},
       { title: 'List', href: '/in-page-list-controller'},
+      { title: 'Slot', href: '/in-page-slot-controller'},
     ]
   },
   {
