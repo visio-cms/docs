@@ -278,10 +278,12 @@ export const navigation: Array<NavGroup> = [
   {
     title: 'Resources',
     links: [
+      { title: 'Fetch external page data', href: '/fetch-external-page-data'},
       { title: 'List Schema', href: '/list-schema'},
       { title: 'propName', href: '/prop-name'},
       { title: 'Side Editing prop', href: '/side-editing-prop'},
       { title: 'Deployment', href: '/deployment'},
+      
     ],
   },
 ]

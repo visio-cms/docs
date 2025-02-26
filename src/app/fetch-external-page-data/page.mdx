@@ -1,0 +1,82 @@
+# Fetch external page data
+To fetch an external page data from an api or the server, you need to introduce a `routeHandler` function in the visio.config.
+
+
+ ```ts {{ title: 'visio.config.ts' }}
+        const config = {
+        blocks: [...blocks],
+        allowImageTransformation: false,
+        ...locales,
+        emailSender: process.env.NEXT_PUBLIC_EMAIL_SENDER || "",
+        projectId: process.env.NEXT_PUBLIC_SUPABASE_PROJECT_ID || "",
+        supabaseProjectUrl: process.env.NEXT_PUBLIC_SUPABASE_URL || "",
+        supabaseAnonKey: process.env.NEXT_PUBLIC_SUPABASE_ANONKEY || "",
+        unsplashAccessKey: process.env.NEXT_PUBLIC_UNSPLASH_ACCESSKEY || "",
+        routeHandlers: async (path: string) => {
+            switch (path) {
+                case "/posts":
+                    const data = await getPosts();
+                    return {posts: [...data]};
+                case path.match(/^\/posts\/\d+$/)?.input:
+                    const res1 = await fetch(`https://jsonplaceholder.typicode.com${path}`);
+                    const data1 = await res1.json();
+                    const d =  {...data1, relatedPosts: await getPosts()};
+                    return d;
+                default:
+                    return null
+            }
+        }
+        };
+
+        export default config;
+        ```
+
+The returned data can be accessed in your block using the `externalData` prop which should be an optional prop type.
+
+```tsx {{title: 'PostList.tsx'}}
+
+import Link from "next/link";
+import { Block } from "visio-cms-lib/types";
+
+
+type PostsPorps = {
+    externalData?: {
+        posts: {
+            userId: number;
+            id: number;
+            title: string;
+            body: string;
+        }[];
+    }
+}
+
+const Posts: Block<PostsPorps> = ({externalData}) => {
+    return (
+        <div>
+            <h1>Posts List</h1>
+            <div className="grid grid-cols-4 gap-4">
+                {externalData?.posts?.map((post) => (
+                    <div key={post.id}>
+                        <Link href={`/posts/${post.id}`} className="text-2xl font-bold hover:text-primary">{post.title}</Link>
+                        <p>{post.body}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+Posts.Schema = {
+    name: 'Posts',
+    id:'posts',
+    defaultPropValues: {
+        externalData: {
+            posts: []
+        }
+    },
+    sideEditingProps: []
+}
+
+export default Posts;
+
+```
